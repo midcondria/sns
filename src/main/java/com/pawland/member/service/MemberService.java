@@ -5,11 +5,14 @@ import com.pawland.member.domain.MemberNicknameHistory;
 import com.pawland.member.dto.request.MemberRegisterRequest;
 import com.pawland.member.dto.request.MemberUpdateRequest;
 import com.pawland.member.dto.response.MemberInfoResponse;
+import com.pawland.member.dto.response.MemberNicknameHistoryResponse;
 import com.pawland.member.repository.MemberNicknameHistoryRepository;
 import com.pawland.member.repository.MemberRepository;
 import lombok.RequiredArgsConstructor;
 import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Transactional;
+
+import java.util.List;
 
 @Service
 @RequiredArgsConstructor
@@ -38,6 +41,13 @@ public class MemberService {
         foundMember.changeNickname(request.getNickname());
         saveMemberHistory(foundMember);
         return MemberInfoResponse.of(foundMember);
+    }
+
+    public List<MemberNicknameHistoryResponse> getNicknameHistories(Long memberId) {
+        findMemberById(memberId);
+        return memberNicknameHistoryRepository.findAllByMemberId(memberId).stream()
+            .map(MemberNicknameHistoryResponse::of)
+            .toList();
     }
 
     private void saveMemberHistory(Member member) {

@@ -10,6 +10,8 @@ import lombok.Builder;
 import lombok.Getter;
 import lombok.NoArgsConstructor;
 
+import java.util.Objects;
+
 @Entity
 @Getter
 @NoArgsConstructor(access = AccessLevel.PROTECTED)
@@ -26,7 +28,7 @@ public class MemberNicknameHistory extends BaseEntity {
     @Builder
     public MemberNicknameHistory(Long id, Long memberId, String nickname) {
         this.id = id;
-        this.memberId = memberId;
-        this.nickname = nickname;
+        this.memberId = Objects.requireNonNull(memberId);
+        this.nickname = Objects.requireNonNull(nickname);
     }
 }
