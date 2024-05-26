@@ -14,9 +14,15 @@ import java.util.List;
 public class FollowController {
 
     private final CreateFollowMemberUsecase createFollowMemberUsecase;
+    private final GetFollowingMembersUsecase getFollowingMembersUsecase;
 
     @PostMapping("/register/{toId}")
     public void create(@PathVariable Long toId, @RequestParam Long fromId) {
         createFollowMemberUsecase.execute(fromId, toId);
+    }
+
+    @PostMapping("/following")
+    public List<MemberInfoResponse> getFollowingList(@RequestParam Long fromId) {
+        return getFollowingMembersUsecase.execute(fromId);
     }
 }

@@ -1,4 +1,4 @@
-package com.pawland.member.controller;
+package com.pawland.application.controller;
 
 import com.pawland.member.dto.request.MemberRegisterRequest;
 import com.pawland.member.dto.request.MemberUpdateRequest;
